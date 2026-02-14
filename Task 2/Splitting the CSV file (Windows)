@@ -1,0 +1,22 @@
+%%bash
+# set these to the real file name/path provided by instructor
+RAW=~/matches_5gb.csv
+
+OUT=~/opendota_processed/matches_parts
+mkdir -p "$OUT"
+
+# header
+head -n 1 "$RAW" > "$OUT/header.csv"
+
+# split body into chunks (tune -l as needed)
+tail -n +2 "$RAW" | split -l 100000 -d --additional-suffix=.csv - "$OUT/part-"
+
+# prepend header back to each part (safe glob)
+shopt -s nullglob
+for f in "$OUT"/part-*.csv; do
+  cat "$OUT/header.csv" "$f" > "${f}.tmp" && mv "${f}.tmp" "$f"
+done
+shopt -u nullglob
+
+ls -lh "$OUT"/part-*.csv | head
+head -n 2 "$OUT/part-00.csv"
