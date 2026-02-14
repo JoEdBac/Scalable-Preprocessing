@@ -1,0 +1,21 @@
+# ---- Writable output ----
+OUTPUT_ROOT = Path.home() / "opendota_processed"
+OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)
+
+DATA_DIR = OUTPUT_ROOT / "data"
+FIG_DIR  = OUTPUT_ROOT / "figures"
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+FIG_DIR.mkdir(parents=True, exist_ok=True)
+
+print("OUTPUT_ROOT:", OUTPUT_ROOT)
+print("DATA_DIR    :", DATA_DIR)
+print("FIG_DIR     :", FIG_DIR)
+
+# ---- DEV controls (we will NOT load everything) ----
+DEV_N_MATCHES = int(os.getenv("DEV_N_MATCHES", "200000"))   # how many rows to keep in Spark after reading sample file
+SAMPLE_LINES  = int(os.getenv("SAMPLE_LINES",  "500000"))   # lines extracted from matches.gz into a local sample csv
+SEED = 42
+
+print("\nDEV_N_MATCHES:", DEV_N_MATCHES)
+print("SAMPLE_LINES :", SAMPLE_LINES)
+print("SEED         :", SEED)
