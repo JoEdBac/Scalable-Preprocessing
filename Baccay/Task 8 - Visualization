@@ -1,0 +1,19 @@
+activity_pd = activity.toPandas()
+duration_pd = duration_trend.toPandas()
+bins_pd = bins.toPandas()
+win_pd = win_rate.toPandas()
+
+# Task 8.1 Static(matplotlib)
+import matplotlib.pyplot as plt
+
+plt.figure()
+plt.plot(activity_pd["count"])
+plt.title("Match Activity Over Time")
+plt.savefig("/home/john/opendota_processed/9/figures/activity.png")
+plt.show()
+
+# Task 8.2 Interactive(plotly)
+import plotly.express as px
+
+fig = px.line(activity_pd, y="count", title="Match Activity Over Time")
+fig.show()
