@@ -2,6 +2,10 @@
 activity = matches_features.groupBy("year","month").count().orderBy("year","month")
 activity.show()
 
+activity.write.mode("overwrite").parquet(
+    "/home/john/bigdata_project/bigdata/bigdata_project/opendota_processed/9/data/eda_activity"
+)
+
 # Task 7.2 - Average Duration Trend
 duration_trend = matches_features.groupBy("year","month") \
     .agg(F.avg("duration_min").alias("avg_duration")) \
@@ -9,9 +13,17 @@ duration_trend = matches_features.groupBy("year","month") \
 
 duration_trend.show()
 
+duration_trend.write.mode("overwrite").parquet(
+    "/home/john/bigdata_project/bigdata/bigdata_project/opendota_processed/9/data/eda_duration_trend"
+)
+
 # Task 7.3 - Duration Distribution
 bins = matches_features.groupBy("duration_bin").count()
 bins.show()
+
+duration_distribution.write.mode("overwrite").parquet(
+    "/home/john/bigdata_project/bigdata/bigdata_project/opendota_processed/9/data/eda_duration_distribution"
+)
 
 # Task 7.4 Are win rates stable over time?
 win_rate = matches_features.groupBy("year","month") \
@@ -19,3 +31,9 @@ win_rate = matches_features.groupBy("year","month") \
     .orderBy("year","month")
 
 win_rate.show()
+
+# The Radiant win rate remains relatively stable around 50–53% across most months, suggesting no strong systemic imbalance over time. Early years show volatility due to small sample sizes.
+
+win_rate_trend.write.mode("overwrite").parquet(
+    "/home/john/bigdata_project/bigdata/bigdata_project/opendota_processed/9/data/eda_win_rate_trend"
+)
