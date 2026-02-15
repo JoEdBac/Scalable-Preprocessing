@@ -1,0 +1,10 @@
+from pyspark.sql import functions as F
+
+base = "/home/john/bigdata_project/bigdata/bigdata_project/opendota_processed/9/matches_parts"
+
+df = spark.read \
+    .option("header", True) \
+    .option("encoding", "UTF-16") \
+    .csv(base)
+
+df.select("match_id","start_time","duration","radiant_win").limit(5).show()
