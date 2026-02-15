@@ -1,0 +1,21 @@
+# Task 7.1 - Match Activity Over Time
+activity = matches_features.groupBy("year","month").count().orderBy("year","month")
+activity.show()
+
+# Task 7.2 - Average Duration Trend
+duration_trend = matches_features.groupBy("year","month") \
+    .agg(F.avg("duration_min").alias("avg_duration")) \
+    .orderBy("year","month")
+
+duration_trend.show()
+
+# Task 7.3 - Duration Distribution
+bins = matches_features.groupBy("duration_bin").count()
+bins.show()
+
+# Task 7.4 Are win rates stable over time?
+win_rate = matches_features.groupBy("year","month") \
+    .agg(F.avg(F.col("radiant_win").cast("int")).alias("win_rate")) \
+    .orderBy("year","month")
+
+win_rate.show()
