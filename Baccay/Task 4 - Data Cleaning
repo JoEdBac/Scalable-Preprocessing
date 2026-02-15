@@ -1,0 +1,25 @@
+# Task 4.1 - Label Types
+matches_clean = df.select(
+    F.expr("try_cast(match_id as bigint)").alias("match_id"),
+    F.expr("try_cast(start_time as bigint)").alias("start_time"),
+    F.expr("try_cast(duration as int)").alias("duration"),
+    F.expr("try_cast(radiant_win as boolean)").alias("radiant_win")
+)
+
+# Task 4.2 - Before vs After Counts
+print("Before Cleaning:", df.count())
+
+matches_clean = matches_clean.filter(F.col("match_id").isNotNull())
+
+print("After Null Removal:", matches_clean.count())
+
+# Task 4.3 - Drop Duplicates
+matches_clean = matches_clean.dropDuplicates(["match_id"])
+
+# Task 4.4 - Filter Unreasonable Durations
+matches_clean = matches_clean.filter(
+    (F.col("duration") > 300) & 
+    (F.col("duration") < 7200)
+)
+
+matches_clean.show(5)
