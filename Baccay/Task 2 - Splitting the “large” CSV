@@ -4,7 +4,7 @@ mkdir -p "$OUT"
 
 head -n 1 "$RAW" > "$OUT/header.csv"
 
-tail -n +2 "$RAW" | split -l 500000 -d --additional-suffix=.csv - "$OUT/part-"
+tail -n +2 "$RAW" | split -l 100000 -d --additional-suffix=.csv - "$OUT/part-"
 
 shopt -s nullglob
 for f in "$OUT"/part-*.csv; do
