@@ -1,0 +1,16 @@
+RAW=~/matches_5gb.csv
+OUT=~/opendota_processed/9/matches_parts
+mkdir -p "$OUT"
+
+head -n 1 "$RAW" > "$OUT/header.csv"
+
+tail -n +2 "$RAW" | split -l 500000 -d --additional-suffix=.csv - "$OUT/part-"
+
+shopt -s nullglob
+for f in "$OUT"/part-*.csv; do
+  cat "$OUT/header.csv" "$f" > "${f}.tmp" && mv "${f}.tmp" "$f"
+done
+shopt -u nullglob
+
+ls -lh "$OUT"/part-*.csv | head
+head -n 2 "$OUT/part-00.csv"
