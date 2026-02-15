@@ -4,19 +4,63 @@ bins_pd = bins.toPandas()
 win_pd = win_rate.toPandas()
 
 # Task 8.1 Static(matplotlib)
-import pandas as pd
+# Match Activity Over Time
+import matplotlib.pyplot as plt
 
-activity_pd["date"] = pd.to_datetime(
-    activity_pd["year"].astype(str) + "-" +
-    activity_pd["month"].astype(str) + "-01"
-)
+activity_pd = activity.toPandas()
+
+activity_pd["year_month"] = activity_pd["year"].astype(str) + "-" + activity_pd["month"].astype(str).str.zfill(2)
 
 plt.figure(figsize=(12,6))
-plt.plot(activity_pd["date"], activity_pd["count"])
-plt.xlabel("Date")
-plt.ylabel("Number of Matches")
+plt.plot(activity_pd["year_month"], activity_pd["count"])
+plt.xticks(rotation=45)
 plt.title("Match Activity Over Time")
+plt.xlabel("Year-Month")
+plt.ylabel("Number of Matches")
 plt.tight_layout()
+plt.savefig("/home/john/opendota_processed/9/figures/activity.png")
+plt.show()
+
+# Average Duration Trend
+duration_pd = duration_trend.toPandas()
+
+duration_pd["year_month"] = duration_pd["year"].astype(str) + "-" + duration_pd["month"].astype(str).str.zfill(2)
+
+plt.figure(figsize=(12,6))
+plt.plot(duration_pd["year_month"], duration_pd["avg_duration"])
+plt.xticks(rotation=45)
+plt.title("Average Match Duration Over Time")
+plt.xlabel("Year-Month")
+plt.ylabel("Average Duration (minutes)")
+plt.tight_layout()
+plt.savefig("/home/john/opendota_processed/9/figures/duration_trend.png")
+plt.show()
+
+# Duration Bin Distribution
+bins_pd = bins.toPandas()
+
+plt.figure(figsize=(8,5))
+plt.bar(bins_pd["duration_bin"], bins_pd["count"])
+plt.title("Match Duration Distribution")
+plt.xlabel("Duration Bin")
+plt.ylabel("Number of Matches")
+plt.tight_layout()
+plt.savefig("/home/john/opendota_processed/9/figures/duration_bins.png")
+plt.show()
+
+# Win Rates Stablity
+win_rate_pd = win_rate.toPandas()
+
+win_rate_pd["year_month"] = win_rate_pd["year"].astype(str) + "-" + win_rate_pd["month"].astype(str).str.zfill(2)
+
+plt.figure(figsize=(12,6))
+plt.plot(win_rate_pd["year_month"], win_rate_pd["win_rate"])
+plt.xticks(rotation=45)
+plt.title("Radiant Win Rate Over Time")
+plt.xlabel("Year-Month")
+plt.ylabel("Win Rate")
+plt.tight_layout()
+plt.savefig("/home/john/opendota_processed/9/figures/win_rate.png")
 plt.show()
 
 # Task 8.2 Interactive(plotly)
