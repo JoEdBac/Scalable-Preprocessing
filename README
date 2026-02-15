@@ -1,1 +1,24 @@
+# Create project directory using WSL:
+mkdir -p ~/bigdata_project
+cd ~/bigdata_project
 
+# Create Virtual Environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install packages
+pip install pyspark matplotlib pandas plotly
+
+# It should look like this
+~/bigdata_project/
+│
+├── venv/
+├── matches_sample_500000.csv
+└── opendota_processed/
+    └── 9/
+        ├── matches_parts/
+        ├── data/
+        │   └── matches_parquet/
+        └── figures/
+
+# Access it manually by going to Ubuntu/User/Home/bigdata_project
