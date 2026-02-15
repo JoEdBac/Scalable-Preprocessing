@@ -22,3 +22,10 @@ pip install pyspark matplotlib pandas plotly
         └── figures/
 
 # Access it manually by going to Ubuntu/User/Home/bigdata_project
+
+# Spark Config
+Spark was run locally using:
+Versionv4.1.1
+Masterlocal[2]
+AppNameScalable 9_BaccayCabaelleroOlaybar_Preprocessing
+
