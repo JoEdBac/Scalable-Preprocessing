@@ -1,0 +1,27 @@
+# Task 5.1 - Convert Epoch to Timestamp
+matches_features = matches_clean.withColumn(
+    "start_ts",
+    F.from_unixtime("start_time").cast("timestamp")
+)
+
+# Task 5.2 - Derive Dates
+matches_features = matches_features \
+    .withColumn("year", F.year("start_ts")) \
+    .withColumn("month", F.month("start_ts"))
+
+# Task 5.3 - Duration in Minutes
+matches_features = matches_features.withColumn(
+    "duration_min",
+    F.col("duration") / 60
+)
+
+# Task 5.4 - Duration Bins
+matches_features = matches_features.withColumn(
+    "duration_bin",
+    F.when(F.col("duration_min") < 20, "<20")
+     .when((F.col("duration_min") >= 20) & (F.col("duration_min") < 30), "20-30")
+     .when((F.col("duration_min") >= 30) & (F.col("duration_min") < 40), "30-40")
+     .otherwise("40+")
+)
+
+matches_features.show(5)
