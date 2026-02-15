@@ -1,0 +1,25 @@
+# Task 1.1 - Initialize Spark
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder \
+    .master("local[2]") \
+    .appName("Scalable Preprocessing - Group 9") \
+    .config("spark.driver.memory", "1g") \
+    .config("spark.sql.shuffle.partitions", "4") \
+    .getOrCreate()
+
+spark
+
+# Task 1.2 - Print Spark Info
+print("Spark Version:", spark.version)
+print("Spark Master:", spark.sparkContext.master)
+print("Spark UI URL:", spark.sparkContext.uiWebUrl)
+
+conf = spark.sparkContext.getConf()
+print("Driver Memory:", conf.get("spark.driver.memory"))
+print("Shuffle Partitions:", spark.conf.get("spark.sql.shuffle.partitions"))
+
+# Task 1.3 - Create Folder Structure (Run in WSL Terminal)
+mkdir -p ~/opendota_processed/9/data
+mkdir -p ~/opendota_processed/9/figures
+ls -R ~/opendota_processed/9
