@@ -18,7 +18,7 @@ plt.title("Match Activity Over Time")
 plt.xlabel("Year-Month")
 plt.ylabel("Number of Matches")
 plt.tight_layout()
-plt.savefig("/home/john/opendota_processed/9/figures/activity.png")
+plt.savefig("/home/john/bigdata_project/bigdata/bigdata_project/opendota_processed/9/figures/activity.png")
 plt.show()
 
 # Average Duration Trend
@@ -33,7 +33,7 @@ plt.title("Average Match Duration Over Time")
 plt.xlabel("Year-Month")
 plt.ylabel("Average Duration (minutes)")
 plt.tight_layout()
-plt.savefig("/home/john/opendota_processed/9/figures/duration_trend.png")
+plt.savefig("/home/john/bigdata_project/bigdata/bigdata_project/opendota_processed/9/figures/duration_trend.png")
 plt.show()
 
 # Duration Bin Distribution
@@ -45,7 +45,7 @@ plt.title("Match Duration Distribution")
 plt.xlabel("Duration Bin")
 plt.ylabel("Number of Matches")
 plt.tight_layout()
-plt.savefig("/home/john/opendota_processed/9/figures/duration_bins.png")
+plt.savefig("/home/john/bigdata_project/bigdata/bigdata_project/opendota_processed/9/figures/duration_bins.png")
 plt.show()
 
 # Win Rates Stablity
@@ -60,7 +60,7 @@ plt.title("Radiant Win Rate Over Time")
 plt.xlabel("Year-Month")
 plt.ylabel("Win Rate")
 plt.tight_layout()
-plt.savefig("/home/john/opendota_processed/9/figures/win_rate.png")
+plt.savefig("/home/john/bigdata_project/bigdata/bigdata_project/opendota_processed/9/figures/win_rate.png")
 plt.show()
 
 # Task 8.2 Interactive(plotly)
