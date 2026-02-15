@@ -1,0 +1,12 @@
+output_path = "/home/john/bigdata_project/bigdata/bigdata_project/opendota_processed/9/data/matches_parquet"
+
+matches_features.write \
+    .mode("overwrite") \
+    .partitionBy("year", "month") \
+    .parquet(output_path)
+
+ls -R ~/bigdata_project/bigdata/bigdata_project/opendota_processed/9/data
+
+spark.read.parquet(output_path) \
+    .filter(F.col("year") == 2016) \
+    .explain(True)
