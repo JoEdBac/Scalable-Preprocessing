@@ -4,12 +4,19 @@ bins_pd = bins.toPandas()
 win_pd = win_rate.toPandas()
 
 # Task 8.1 Static(matplotlib)
-import matplotlib.pyplot as plt
+import pandas as pd
 
-plt.figure()
-plt.plot(activity_pd["count"])
+activity_pd["date"] = pd.to_datetime(
+    activity_pd["year"].astype(str) + "-" +
+    activity_pd["month"].astype(str) + "-01"
+)
+
+plt.figure(figsize=(12,6))
+plt.plot(activity_pd["date"], activity_pd["count"])
+plt.xlabel("Date")
+plt.ylabel("Number of Matches")
 plt.title("Match Activity Over Time")
-plt.savefig("/home/john/opendota_processed/9/figures/activity.png")
+plt.tight_layout()
 plt.show()
 
 # Task 8.2 Interactive(plotly)
